@@ -20,5 +20,11 @@ $ zatanna -O HELLO WORLD
 DLROW OLLEH
 ```
 
+## Installation
+
+1. Clone this repository
+2. `cd` into the clone
+3. `make install` or `sudo make install`
+
 [dc-zatanna]: https://en.wikipedia.org/wiki/Zatanna
 
