@@ -1,5 +1,7 @@
 # `zatanna`
 
+[![CI](https://github.com/spenserblack/zatanna/actions/workflows/ci.yml/badge.svg)](https://github.com/spenserblack/zatanna/actions/workflows/ci.yml)
+
 ## Description
 
 A utility executable that prints the text of each
