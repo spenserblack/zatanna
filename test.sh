@@ -21,7 +21,12 @@ it_works() {
 	assert_eq "$RESULT" "olleh dlrow"
 }
 
-TESTS="it_works"
+reversed_order() {
+	RESULT="$("$EXE" -n -O hello world)"
+	assert_eq "$RESULT" "dlrow olleh"
+}
+
+TESTS="it_works reversed_order"
 for t in $TESTS; do
 	echo -n "$t..."
 	"$t"
