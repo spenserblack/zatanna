@@ -12,6 +12,9 @@ By default, each positional argument is printed
 in reverse, but *order is maintained.* You can
 reverse the order with `-O` or `--reverse-order`.
 
+Multi-byte characters characters are supported, and should still display properly when
+reversed.
+
 ## Example
 
 ```console
@@ -20,6 +23,10 @@ OLLEH DLROW
 
 $ zatanna -O HELLO WORLD
 DLROW OLLEH
+
+# multi-byte characters are supported
+$ zatanna "こんにちは"
+"はちにんこ"
 ```
 
 ## Installation
