@@ -1,7 +1,10 @@
 CC=gcc
 
-bin/zatanna: src/main.c
-	$(CC) -o bin/zatanna src/main.c
+bin/zatanna: bin/grapheme.o src/main.c
+	$(CC) -o bin/zatanna bin/grapheme.o src/main.c
+
+bin/grapheme.o: src/grapheme.c src/grapheme.h
+	$(CC) -c -o bin/grapheme.o src/grapheme.c
 
 .PHONY: install
 install: bin/zatanna

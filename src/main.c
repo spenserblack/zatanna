@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "grapheme.h"
 
 static bool show_help = false;
 static bool reverse_order = false;
@@ -34,7 +35,7 @@ int parse_args(char * positional_args[], const int argc, char ** argv);
 /**
  * Prints a word in reverse.
  */
-void print_word(const char * word);
+void print_word(char * word);
 
 /**
  * Prints the help message.
@@ -106,13 +107,18 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 	return positional_arg_count;
 }
 
-void print_word(const char * word) {
-	// TODO Should handle multi-byte characters, like "あ"
-	size_t index = strlen(word);
+void print_word(char * word) {
+	size_t char_count = strlen(word);
 	if (index == 0) {
 		return;
 	}
-	do {
-		printf("%c", word[--index]);
-	} while (index != 0);
+
+	struct grapheme graphemes[char_count];
+	const int graphemes_len = collect_graphemes(word, graphemes);
+	for (int i = graphemes_len - 1; i >= 0; --i) {
+		const struct grapheme grapheme = graphemes[i];
+		for (int char_i = 0; char_i < grapheme.len; ++char_i) {
+			printf("%c", grapheme.substr[char_i]);
+		}
+	}
 }

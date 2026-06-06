@@ -26,7 +26,22 @@ reversed_order() {
 	assert_eq "$RESULT" "dlrow olleh"
 }
 
-TESTS="it_works reversed_order"
+multi_byte_chars_cn() {
+	RESULT="$("$EXE" -n -O "大熊猫")"
+	assert_eq "$RESULT" "猫熊大"
+}
+
+multi_byte_chars_de() {
+	RESULT="$("$EXE" -n -O "tschüß")"
+	assert_eq "$RESULT" "ßühcst"
+}
+
+multi_byte_chars_jp() {
+	RESULT="$("$EXE" -n -O "こんにちは")"
+	assert_eq "$RESULT" "はちにんこ"
+}
+
+TESTS="it_works reversed_order multi_byte_chars_cn multi_byte_chars_de multi_byte_chars_jp"
 for t in $TESTS; do
 	echo -n "$t..."
 	"$t"
