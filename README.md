@@ -26,7 +26,7 @@ DLROW OLLEH
 
 # multi-byte characters are supported
 $ zatanna "こんにちは"
-"はちにんこ"
+はちにんこ
 ```
 
 ## Installation
