@@ -18,4 +18,9 @@ struct grapheme {
  * is a safe length for `graphemes`.
  */
 int collect_graphemes(char * s, struct grapheme * graphemes);
+
+/**
+ * Prints a grapheme. It does *not* print a newline.
+ */
+void print_grapheme(const struct grapheme grapheme);
 #endif

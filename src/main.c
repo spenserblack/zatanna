@@ -117,8 +117,6 @@ void print_word(char * word) {
 	const int graphemes_len = collect_graphemes(word, graphemes);
 	for (int i = graphemes_len - 1; i >= 0; --i) {
 		const struct grapheme grapheme = graphemes[i];
-		for (int char_i = 0; char_i < grapheme.len; ++char_i) {
-			printf("%c", grapheme.substr[char_i]);
-		}
+		print_grapheme(grapheme);
 	}
 }

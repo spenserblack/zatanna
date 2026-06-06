@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "grapheme.h"
 
 /**
@@ -43,4 +44,10 @@ int collect_graphemes(char * s, struct grapheme * graphemes) {
 	}
 
 	return collection_len;
+}
+
+void print_grapheme(const struct grapheme grapheme) {
+	for (int i = 0; i < grapheme.len; ++i) {
+		printf("%c", grapheme.substr[i]);
+	}
 }
