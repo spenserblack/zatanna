@@ -27,17 +27,17 @@ reversed_order() {
 }
 
 multi_byte_chars_cn() {
-	RESULT="$("$EXE" -n -O "大熊猫")"
+	RESULT="$("$EXE" -n "大熊猫")"
 	assert_eq "$RESULT" "猫熊大"
 }
 
 multi_byte_chars_de() {
-	RESULT="$("$EXE" -n -O "tschüß")"
+	RESULT="$("$EXE" -n "tschüß")"
 	assert_eq "$RESULT" "ßühcst"
 }
 
 multi_byte_chars_jp() {
-	RESULT="$("$EXE" -n -O "こんにちは")"
+	RESULT="$("$EXE" -n "こんにちは")"
 	assert_eq "$RESULT" "はちにんこ"
 }
 
