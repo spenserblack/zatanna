@@ -41,7 +41,12 @@ multi_byte_chars_jp() {
 	assert_eq "$RESULT" "はちにんこ"
 }
 
-TESTS="it_works reversed_order multi_byte_chars_cn multi_byte_chars_de multi_byte_chars_jp"
+normalized_casing() {
+	RESULT="$("$EXE" -n -c Hello world)"
+	assert_eq "$RESULT" "Olleh dlrow"
+}
+
+TESTS="it_works reversed_order multi_byte_chars_cn multi_byte_chars_de multi_byte_chars_jp normalized_casing"
 for t in $TESTS; do
 	echo -n "$t..."
 	"$t"
