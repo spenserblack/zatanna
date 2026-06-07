@@ -24,6 +24,7 @@
 static bool show_help = false;
 static bool reverse_order = false;
 static bool print_newline = true;
+static bool normalize_casing = false;
 
 /**
  * Parses the optional arguments, setting the global variables. Fills `positional_args`
@@ -82,9 +83,10 @@ int main(int argc, char * argv[]) {
 
 void print_help(const char * exe) {
 	printf("USAGE\n");
-	printf("\t%s [-n] [-O|--reverse-order] words...\n", exe);
+	printf("\t%s [-c|--normalize-casing] [-n] [-O|--reverse-order] words...\n", exe);
 	printf("\n");
 	printf("OPTIONS\n");
+	printf("-c, --normalize-casing\tSwap the casing of the first and last letter of each word\n");
 	printf("-n\t\t\tDon't print a newline at the end of the output\n");
 	printf("-O, --reverse-order\tPrint from the last positional argument to the first\n");
 	printf("-h, --help\t\tShow this help message and exit\n");
@@ -94,7 +96,9 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 	int positional_arg_count = 0;
 	for (int i = 1; i < argc; ++i) {
 		char * arg = argv[i];
-		if (strcmp("-n", arg) == 0) {
+		if (strcmp("-c", arg) == 0 || strcmp("--normalize-casing", arg) == 0) {
+			normalize_casing = true;
+		} else if (strcmp("-n", arg) == 0) {
 			print_newline = false;
 		} else if (strcmp("-O", arg) == 0 || strcmp("--reverse-order", arg) == 0) {
 			reverse_order = true;
