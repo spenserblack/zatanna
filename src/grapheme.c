@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "grapheme.h"
@@ -44,6 +45,44 @@ int collect_graphemes(char * s, struct grapheme * graphemes) {
 	}
 
 	return collection_len;
+}
+
+bool grapheme_is_uppercase(const struct grapheme grapheme) {
+	// TODO Currently incomplete, and does not support other languages with capitalization.
+	const char c = grapheme.substr[0];
+	return 'A' <= c && c <= 'Z';
+}
+
+bool grapheme_is_lowercase(const struct grapheme grapheme) {
+	// TODO Currently incomplete, and does not support other languages with capitalization.
+	const char c = grapheme.substr[0];
+	return 'a' <= c && c <= 'z';
+}
+
+static const char * latin_uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const struct grapheme grapheme_to_uppercase(const struct grapheme grapheme) {
+	// TODO Currently incomplete, and does not support other languages with capitalization.
+	const char c = grapheme.substr[0];
+	if ('a' <= c && c <= 'z') {
+		const unsigned char index = c - 'a';
+		const struct grapheme uppercase = { .substr = &(latin_uppercase[index]), .len = 1 };
+		return uppercase;
+	}
+	return grapheme;
+}
+
+static const char * latin_lowercase = "abcdefghijklmnopqrstuvwxyz";
+
+const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme) {
+	// TODO Currently incomplete, and does not support other languages with capitalization.
+	const char c = grapheme.substr[0];
+	if ('A' <= c && c <= 'Z') {
+		const unsigned char index = c - 'A';
+		const struct grapheme lowercase = { .substr = &(latin_lowercase[index]), .len = 1 };
+		return lowercase;
+	}
+	return grapheme;
 }
 
 void print_grapheme(const struct grapheme grapheme) {
