@@ -1,0 +1,40 @@
+.TH "ZATANNA" "Zatanna manual"
+
+.SH NAME
+
+zatanna - Print reversed words
+
+.SH SYNOPSIS
+
+zatanna [flags] <word>...
+
+.SH OPTIONS
+
+.TP
+-c, --normalize-casing
+Swap the casing of the first and last letter of each word
+
+.TP
+-n
+Don't print a newline at the end of the output
+
+.TP
+-O, --reverse-order
+Print from the last positional argument to the first
+
+.TP
+-h, --help
+Print a help message and exit
+
+.TP
+-p, --punctuation-order
+Keep punctuation at the end of a word
+
+.SH EXAMPLE
+.EX
+$ zatanna Hello, World!
+,olleH !dlroW
+
+$ zatanna -c -p Hello, World!
+Olleh, Dlrow!
+.EE
