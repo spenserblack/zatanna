@@ -11,6 +11,11 @@ insert_final_newline = true
 indent_size = 4
 indent_style = tab
 
+# Docker
+[Dockerfile]
+indent_style = space
+indent_size = 4
+
 # JSON (and with comments)
 [*.{json,jsonc}]
 indent_style = space
