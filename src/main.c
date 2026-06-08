@@ -113,7 +113,7 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 
 void print_word(char * word) {
 	size_t char_count = strlen(word);
-	if (index == 0) {
+	if (char_count == 0) {
 		return;
 	}
 
