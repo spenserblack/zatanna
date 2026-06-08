@@ -24,6 +24,7 @@
 static bool show_help = false;
 static bool reverse_order = false;
 static bool print_newline = true;
+static bool normalize_casing = false;
 
 /**
  * Parses the optional arguments, setting the global variables. Fills `positional_args`
@@ -82,9 +83,10 @@ int main(int argc, char * argv[]) {
 
 void print_help(const char * exe) {
 	printf("USAGE\n");
-	printf("\t%s [-n] [-O|--reverse-order] words...\n", exe);
+	printf("\t%s [-c|--normalize-casing] [-n] [-O|--reverse-order] words...\n", exe);
 	printf("\n");
 	printf("OPTIONS\n");
+	printf("-c, --normalize-casing\tSwap the casing of the first and last letter of each word\n");
 	printf("-n\t\t\tDon't print a newline at the end of the output\n");
 	printf("-O, --reverse-order\tPrint from the last positional argument to the first\n");
 	printf("-h, --help\t\tShow this help message and exit\n");
@@ -94,7 +96,9 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 	int positional_arg_count = 0;
 	for (int i = 1; i < argc; ++i) {
 		char * arg = argv[i];
-		if (strcmp("-n", arg) == 0) {
+		if (strcmp("-c", arg) == 0 || strcmp("--normalize-casing", arg) == 0) {
+			normalize_casing = true;
+		} else if (strcmp("-n", arg) == 0) {
 			print_newline = false;
 		} else if (strcmp("-O", arg) == 0 || strcmp("--reverse-order", arg) == 0) {
 			reverse_order = true;
@@ -115,7 +119,14 @@ void print_word(char * word) {
 
 	struct grapheme graphemes[char_count];
 	const int graphemes_len = collect_graphemes(word, graphemes);
-	for (int i = graphemes_len - 1; i >= 0; --i) {
+	const int last_index = graphemes_len - 1;
+
+	if (normalize_casing && grapheme_is_uppercase(graphemes[0])) {
+		graphemes[last_index] = grapheme_to_uppercase(graphemes[last_index]);
+		graphemes[0] = grapheme_to_lowercase(graphemes[0]);
+	}
+
+	for (int i = last_index; i >= 0; --i) {
 		const struct grapheme grapheme = graphemes[i];
 		print_grapheme(grapheme);
 	}
