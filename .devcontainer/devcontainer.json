@@ -1,0 +1,19 @@
+{
+  "name": "Main",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      "VARIANT": "debian"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "EditorConfig.EditorConfig",
+        "github.vscode-github-actions",
+        "ms-vscode.cpptools"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
