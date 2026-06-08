@@ -85,6 +85,20 @@ const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme) {
 	return grapheme;
 }
 
+bool grapheme_is_punctuation(const struct grapheme grapheme) {
+	// TODO Currently incomplete, and does not support punctuation in other languages.
+	switch (grapheme.substr[0]) {
+	case '!':
+	case ',':
+	case '.':
+	case '?':
+	case ':':
+	case ';':
+		return true;
+	}
+	return false;
+}
+
 void print_grapheme(const struct grapheme grapheme) {
 	for (int i = 0; i < grapheme.len; ++i) {
 		printf("%c", grapheme.substr[i]);

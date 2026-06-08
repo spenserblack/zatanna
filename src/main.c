@@ -25,6 +25,7 @@ static bool show_help = false;
 static bool reverse_order = false;
 static bool print_newline = true;
 static bool normalize_casing = false;
+static bool keep_punctuation_order = false;
 
 /**
  * Parses the optional arguments, setting the global variables. Fills `positional_args`
@@ -89,6 +90,7 @@ void print_help(const char * exe) {
 	printf("-c, --normalize-casing\tSwap the casing of the first and last letter of each word\n");
 	printf("-n\t\t\tDon't print a newline at the end of the output\n");
 	printf("-O, --reverse-order\tPrint from the last positional argument to the first\n");
+	printf("-p, --punctuation-order\tKeep punctuation at the end of a word\n");
 	printf("-h, --help\t\tShow this help message and exit\n");
 }
 
@@ -102,6 +104,8 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 			print_newline = false;
 		} else if (strcmp("-O", arg) == 0 || strcmp("--reverse-order", arg) == 0) {
 			reverse_order = true;
+		} else if (strcmp("-p", arg) == 0 || strcmp("--punctuation-order", arg) == 0) {
+			keep_punctuation_order = true;
 		} else if (strcmp("-h", arg) == 0 || strcmp("--help", arg) == 0) {
 			show_help = true;
 		} else {
@@ -119,7 +123,13 @@ void print_word(char * word) {
 
 	struct grapheme graphemes[char_count];
 	const int graphemes_len = collect_graphemes(word, graphemes);
-	const int last_index = graphemes_len - 1;
+	int last_index = graphemes_len - 1;
+	const bool print_punctuation_after =
+		keep_punctuation_order && grapheme_is_punctuation(graphemes[last_index]);
+
+	if (print_punctuation_after) {
+		last_index -= 1;
+	}
 
 	if (normalize_casing && grapheme_is_uppercase(graphemes[0])) {
 		graphemes[last_index] = grapheme_to_uppercase(graphemes[last_index]);
@@ -129,5 +139,9 @@ void print_word(char * word) {
 	for (int i = last_index; i >= 0; --i) {
 		const struct grapheme grapheme = graphemes[i];
 		print_grapheme(grapheme);
+	}
+
+	if (print_punctuation_after) {
+		print_grapheme(graphemes[last_index + 1]);
 	}
 }
