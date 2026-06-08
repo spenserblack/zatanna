@@ -13,3 +13,7 @@ install: bin/zatanna
 .PHONY: test
 test: bin/zatanna
 	./test.sh
+
+.PHONY: format
+format:
+	clang-format -i src/*
