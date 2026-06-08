@@ -41,6 +41,11 @@ const struct grapheme grapheme_to_uppercase(const struct grapheme grapheme);
 const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme);
 
 /**
+ * Checks if the grapheme is punctuation.
+*/
+bool grapheme_is_punctuation(const struct grapheme grapheme);
+
+/**
  * Prints a grapheme. It does *not* print a newline.
  */
 void print_grapheme(const struct grapheme grapheme);
