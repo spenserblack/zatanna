@@ -31,9 +31,14 @@ $ zatanna "こんにちは"
 
 ## Installation
 
-1. Clone this repository
-2. `cd` into the clone
-3. `make install` or `sudo make install`
+### Unix
+
+This will request and run a script that clones this repository to a temporary directory and runs
+`make install`.
+
+```shell
+curl -fsSL https://github.com/spenserblack/zatanna/raw/refs/heads/main/scripts/install.sh | sh
+```
 
 [dc-zatanna]: https://en.wikipedia.org/wiki/Zatanna
 
