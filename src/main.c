@@ -119,7 +119,14 @@ void print_word(char * word) {
 
 	struct grapheme graphemes[char_count];
 	const int graphemes_len = collect_graphemes(word, graphemes);
-	for (int i = graphemes_len - 1; i >= 0; --i) {
+	const int last_index = graphemes_len - 1;
+
+	if (normalize_casing && grapheme_is_uppercase(graphemes[0])) {
+		graphemes[last_index] = grapheme_to_uppercase(graphemes[last_index]);
+		graphemes[0] = grapheme_to_lowercase(graphemes[0]);
+	}
+
+	for (int i = last_index; i >= 0; --i) {
 		const struct grapheme grapheme = graphemes[i];
 		print_grapheme(grapheme);
 	}
