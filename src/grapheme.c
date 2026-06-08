@@ -1,7 +1,7 @@
-#include <stdbool.h>
-#include <stdlib.h>
-#include <stdio.h>
 #include "grapheme.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 /**
  * Guesses the length of a grapheme from the first byte (`char`).
@@ -66,7 +66,7 @@ const struct grapheme grapheme_to_uppercase(const struct grapheme grapheme) {
 	const char c = grapheme.substr[0];
 	if ('a' <= c && c <= 'z') {
 		const unsigned char index = c - 'a';
-		const struct grapheme uppercase = { .substr = &(latin_uppercase[index]), .len = 1 };
+		const struct grapheme uppercase = {.substr = &(latin_uppercase[index]), .len = 1};
 		return uppercase;
 	}
 	return grapheme;
@@ -79,7 +79,7 @@ const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme) {
 	const char c = grapheme.substr[0];
 	if ('A' <= c && c <= 'Z') {
 		const unsigned char index = c - 'A';
-		const struct grapheme lowercase = { .substr = &(latin_lowercase[index]), .len = 1 };
+		const struct grapheme lowercase = {.substr = &(latin_lowercase[index]), .len = 1};
 		return lowercase;
 	}
 	return grapheme;
