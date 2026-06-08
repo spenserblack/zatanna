@@ -88,13 +88,13 @@ const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme) {
 bool grapheme_is_punctuation(const struct grapheme grapheme) {
 	// TODO Currently incomplete, and does not support punctuation in other languages.
 	switch (grapheme.substr[0]) {
-		case '!':
-		case ',':
-		case '.':
-		case '?':
-		case ':':
-		case ';':
-			return true;
+	case '!':
+	case ',':
+	case '.':
+	case '?':
+	case ':':
+	case ';':
+		return true;
 	}
 	return false;
 }

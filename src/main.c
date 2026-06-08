@@ -124,7 +124,8 @@ void print_word(char * word) {
 	struct grapheme graphemes[char_count];
 	const int graphemes_len = collect_graphemes(word, graphemes);
 	int last_index = graphemes_len - 1;
-	const bool print_punctuation_after = keep_punctuation_order && grapheme_is_punctuation(graphemes[last_index]);
+	const bool print_punctuation_after =
+		keep_punctuation_order && grapheme_is_punctuation(graphemes[last_index]);
 
 	if (print_punctuation_after) {
 		last_index -= 1;

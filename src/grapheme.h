@@ -42,7 +42,7 @@ const struct grapheme grapheme_to_lowercase(const struct grapheme grapheme);
 
 /**
  * Checks if the grapheme is punctuation.
-*/
+ */
 bool grapheme_is_punctuation(const struct grapheme grapheme);
 
 /**
