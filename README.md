@@ -18,11 +18,12 @@ reversed.
 ## Example
 
 ```console
-$ zatanna HELLO WORLD
-OLLEH DLROW
+$ zatanna Hello, World!
+,olleH !dlroW
 
-$ zatanna -O HELLO WORLD
-DLROW OLLEH
+# Preserve punctuation order and normalize casing
+$ zatanna -p -c Hello, World!
+Olleh, Dlrow!
 
 # multi-byte characters are supported
 $ zatanna "こんにちは"
