@@ -6,3 +6,6 @@ cd "$TEMP_DIR"
 make install
 echo "Installed"
 rm -rf "$TEMP_DIR"
+
+# Refresh the `man` database (used by whatis)
+mandb
