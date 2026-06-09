@@ -84,7 +84,7 @@ int main(int argc, char * argv[]) {
 
 void print_help(const char * exe) {
 	printf("USAGE\n");
-	printf("\t%s [-c|--normalize-casing] [-n] [-O|--reverse-order] words...\n", exe);
+	printf("\t%s [flags] words...\n", exe);
 	printf("\n");
 	printf("OPTIONS\n");
 	printf("-c, --normalize-casing\tSwap the casing of the first and last letter of each word\n");
@@ -98,16 +98,35 @@ int parse_args(char * positional_args[], const int argc, char ** argv) {
 	int positional_arg_count = 0;
 	for (int i = 1; i < argc; ++i) {
 		char * arg = argv[i];
-		if (strcmp("-c", arg) == 0 || strcmp("--normalize-casing", arg) == 0) {
+		if (strcmp("--normalize-casing", arg) == 0) {
 			normalize_casing = true;
-		} else if (strcmp("-n", arg) == 0) {
-			print_newline = false;
-		} else if (strcmp("-O", arg) == 0 || strcmp("--reverse-order", arg) == 0) {
+		} else if (strcmp("--reverse-order", arg) == 0) {
 			reverse_order = true;
-		} else if (strcmp("-p", arg) == 0 || strcmp("--punctuation-order", arg) == 0) {
+		} else if (strcmp("--punctuation-order", arg) == 0) {
 			keep_punctuation_order = true;
-		} else if (strcmp("-h", arg) == 0 || strcmp("--help", arg) == 0) {
+		} else if (strcmp("--help", arg) == 0) {
 			show_help = true;
+		} else if (arg[0] == '-') {
+			char c;
+			for (size_t i = 1; (c = arg[i]) != '\0'; ++i) {
+				switch (c) {
+				case 'c':
+					normalize_casing = true;
+					break;
+				case 'n':
+					print_newline = false;
+					break;
+				case 'O':
+					reverse_order = true;
+					break;
+				case 'p':
+					keep_punctuation_order = true;
+					break;
+				case 'h':
+					show_help = true;
+					break;
+				}
+			}
 		} else {
 			positional_args[positional_arg_count++] = arg;
 		}
