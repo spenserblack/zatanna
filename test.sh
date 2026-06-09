@@ -56,7 +56,12 @@ punctuation_order_with_normalized_casing() {
 	assert_eq "$RESULT" "Olleh, Dlrow!"
 }
 
-TESTS="it_works reversed_order multi_byte_chars_cn multi_byte_chars_de multi_byte_chars_jp normalized_casing punctuation_order punctuation_order_with_normalized_casing"
+flag_bundling() {
+	RESULT="$("$EXE" -ncp Hello, World!)"
+	assert_eq "$RESULT" "Olleh, Dlrow!"
+}
+
+TESTS="it_works reversed_order multi_byte_chars_cn multi_byte_chars_de multi_byte_chars_jp normalized_casing punctuation_order punctuation_order_with_normalized_casing flag_bundling"
 for t in $TESTS; do
 	echo -n "$t..."
 	"$t"
